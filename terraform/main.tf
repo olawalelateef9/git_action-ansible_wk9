@@ -1,4 +1,10 @@
 terraform {
+  backend "s3" {
+    bucket  = "olawale-s3-devops-bucket"
+    key     = "envs/dev/terraform.tfstate"
+    region  = "us-east-2"
+    encrypt = true
+  }  
   required_version = ">= 1.6.0"
 
   required_providers {
@@ -30,8 +36,8 @@ resource "aws_instance" "nginx-node" {
 resource "aws_instance" "java-node" {
   ami                    = "ami-03ea746da1a2e36e7"
   instance_type          = "t2.small"
-  subnet_id              = "sg-06aab2abe1f311dbc"
-  vpc_security_group_ids = ["sg-0dfb7e8960e8d9c86"]
+  subnet_id              = "subnet-03e8a88d085ee2c50"
+  vpc_security_group_ids = ["sg-06aab2abe1f311dbc"]
   key_name               = "jenkinskp"
 
   tags = {
@@ -43,8 +49,8 @@ resource "aws_instance" "java-node" {
 resource "aws_instance" "ansible-server" {
   ami                    = "ami-03ea746da1a2e36e7"
   instance_type          = "t2.small"
-  subnet_id              = "sg-06aab2abe1f311dbc"
-  vpc_security_group_ids = ["sg-0dfb7e8960e8d9c86"]
+  subnet_id              = "subnet-03e8a88d085ee2c50"
+  vpc_security_group_ids = ["sg-06aab2abe1f311dbc"]
   key_name               = "jenkinskp"
 
   tags = {
