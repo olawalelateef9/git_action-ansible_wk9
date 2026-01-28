@@ -1,0 +1,17 @@
+---
+- name: Nginx Install
+  hosts: web
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: EC2 Nginx Install
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start Nginx Service
+      service:
+        name: nginx
+        state: started
+        enabled: true    
